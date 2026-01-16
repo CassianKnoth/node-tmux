@@ -1,0 +1,44 @@
+import { Window } from './types/config-types.js';
+
+export const configuredSessions: Record<string, Window[]> = {
+	testSession: [
+		{
+			name: 'test-window',
+			workspacePath:
+				'/Users/cassian.knoth/Desktop/Cassian/playground/tmux/tmux-test-project',
+			additionalPanes: [
+				{
+					name: 'server',
+				},
+				{
+					name: 'watcher',
+					subPath: 'src',
+					command: 'echo "HELLO FROM WATCHER"',
+				},
+			],
+		},
+		{
+			name: 'another-window',
+			workspacePath:
+				'/Users/cassian.knoth/Desktop/Cassian/playground/tmux/tmux-test-project',
+			additionalPanes: [
+				{
+					name: 'tester',
+					command: 'echo "HELLO FROM TESTER !!!"',
+				},
+			],
+		},
+	],
+	anotherSession: [
+		{
+			name: 'yet-another-test-window',
+			workspacePath:
+				'/Users/cassian.knoth/Desktop/Cassian/playground/tmux/tmux-test-project',
+			additionalPanes: [
+				{
+					name: 'yet-another-something',
+				},
+			],
+		},
+	],
+};

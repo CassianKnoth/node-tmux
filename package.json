@@ -3,8 +3,9 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"build": "rm -rf dist && tsc && cp src/bash dist/"
+		"build": "rm -rf dist && tsc && cp -r src/bash dist/"
 	},
 	"keywords": [],
 	"author": "",
