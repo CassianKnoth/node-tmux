@@ -5,7 +5,6 @@ import { handleNoConfigState } from './handler/handle-no-config-state.js';
 
 export const transition = async (currentContext: Context): Promise<Context> => {
 	printLineSeparator();
-	console.log('transition from: ', currentContext);
 
 	let newContext: Context = { ...currentContext, sessionState: 'EXIT' };
 

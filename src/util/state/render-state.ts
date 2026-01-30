@@ -4,8 +4,6 @@ import { listConfigurations } from '../list-configuration.js';
 import { printLineSeparator } from '../layout/line-separator.js';
 
 export const renderState = async ({ sessionState, sessionName }: Context) => {
-	console.log('renderState: ', sessionState);
-
 	printLineSeparator();
 
 	switch (sessionState) {
@@ -17,19 +15,19 @@ export const renderState = async ({ sessionState, sessionName }: Context) => {
 					'⚠️  Please provide a valid session-configuration key to start or interact with a session',
 				),
 			);
-			listConfigurations();
 			break;
 		case 'DETACHED_SESSION':
 			console.log(
 				// double space due to emoji consisting of two characters
-				styleText('yellow', `⚠️  Session ${sessionName} is running detached`),
+				styleText('yellow', `⚠️  Session "${sessionName}" is running detached`),
 			);
 			break;
 		case 'ATTACHED_SESSION':
 			console.log(
 				// double space due to emoji consisting of two characters
-				styleText('yellow', `⚠️  Session ${sessionName} is running attached`),
+				styleText('yellow', `⚠️  Session "${sessionName}" is running attached`),
 			);
 			break;
 	}
+	listConfigurations();
 };

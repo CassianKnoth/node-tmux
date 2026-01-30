@@ -35,7 +35,6 @@ while (true) {
 
 	// handle state transition
 	const newContext = await transition(context);
-	console.log('received new state', newContext);
 
 	// set new state
 	context = newContext;

@@ -1,5 +1,4 @@
 import { ChoiceHandler } from '../../../../types/user-choice-types.js';
-import { freshState } from '../../../state/fresh-state.js';
 import { tmuxAttach } from '../../../tmux/attach-session.js';
 
 export const attachHandler: ChoiceHandler = (currentContext) => {
@@ -9,5 +8,5 @@ export const attachHandler: ChoiceHandler = (currentContext) => {
 
 	tmuxAttach(currentContext.sessionName);
 
-	return freshState;
+	return { ...currentContext, sessionState: 'EXIT' };
 };
