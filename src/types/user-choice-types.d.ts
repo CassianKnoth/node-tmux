@@ -1,4 +1,3 @@
-import { Action } from './action.js';
 import { Context } from './state.js';
 
 export type UserChoice = 'attach' | 'destroy' | 'restart' | 'other' | 'exit';
