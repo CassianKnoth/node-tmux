@@ -39,7 +39,7 @@ node-tmux
 
 ### Default vs custom config file
 
-`node-tmux init` will create a `.node-tmux` folder with a `node-tmux-config.json` file in your home directory. Running `node-tmux` will look for that as a default config file (with that name!). You can also run `node-tmux init --local` (with `-l`/`--local` flag) which creates a `node-tmux-config.json` file in your current directory. Whether you create such a config file this way or completely on your own, you can run any such config by passing its path with the `-c`/`--config` flag:
+`node-tmux init` will create a `.node-tmux` folder with a `node-tmux-config.json` file in your home directory. Running `node-tmux` will look for that as a default config file (with that name!). You can also run `node-tmux init --local` (with `-l`/`--local` flag) which creates a `node-tmux-config.json` file in your current directory. Whether you create such a config file that way or completely on your own, you can run any such config by passing its path with the `-c`/`--config` flag:
 
 ```bash
 node-tmux --config ./some/directory/node-tmux-config.json
@@ -70,8 +70,8 @@ Look at this simple config template:
 					},
 					{
 						"name": "watcher",
-						"subPath": "src",
-						// results in /absolute/path/to/relative/path/to/subfoldermy-awesome-project
+						"subPath": "subfolder",
+						// results in /absolute/path/to/my-awesome-project/subfolder
 						"command": "echo HELLO FROM WATCHER" // runs in the shell you configured above
 					}
 				]
@@ -99,17 +99,17 @@ If no session is running, you could start it now:
 
 Every new session starts in _detached_ state.
 
-> 💡 Notice how the states will be indicated in the session list already
-
 Now you will have more options to deal with the session:
 
 <img src="./assets/options.png">
+
+> 💡 Notice how the states will be indicated in the session list already
 
 - attach --> attaches the session to your current terminal
 - restart --> restarts the session
 - destroy --> kills the session
 - other --> deal with another session
-- exit --> exit CLI (default)
+- exit --> exit CLI
 
 > 💡 It is sufficient to type the first letter of each option. Also each option comes with confirmation.
 
