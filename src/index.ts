@@ -10,13 +10,12 @@ import { getConfig } from './util/config/get-config.js';
 import { parseCLiArgs } from './util/commands/parser/parse-cli-args.js';
 import { handleInit } from './util/commands/handler/handle-init.js';
 import { DEFAULT_CONFIG_FILE_PATH } from './util/config/config-paths.js';
+import { handleHelp } from './util/commands/handler/handle-help.js';
 
 printLineSeparator();
 console.log('🚀 tmux ACTiON!');
 
 const parsedArgs = parseCLiArgs();
-
-console.log(`parsedArgs: `, parsedArgs);
 
 // handle everything else than 'run'
 switch (parsedArgs.command) {
@@ -24,16 +23,9 @@ switch (parsedArgs.command) {
 		handleInit(parsedArgs.local);
 		break;
 	case 'help':
-		console.log('HELP');
-		exitOut();
+		handleHelp();
 		break;
 }
-
-// no argument --> START look for default config
-// -c/--config --> START look for custom config
-// init --> create default config if not exists
-// init -l/--local --> copy config template to current path
-// -h/--help --> list instructions
 
 printLineSeparator();
 console.log('⏳ Getting config file path...');
