@@ -1,5 +1,5 @@
 {
-	"name": "node-tmux",
+	"name": "node-tmux-cli",
 	"version": "0.2.0",
 	"description": "",
 	"main": "index.js",
