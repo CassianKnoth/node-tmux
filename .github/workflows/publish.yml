@@ -16,6 +16,8 @@ on:
 jobs:
     publish:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
 
         steps:
             - name: Setup node
@@ -29,6 +31,8 @@ jobs:
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             - name: Checkout repository
               uses: actions/checkout@v5
+              with:
+                token: ${{ secrets.GH_PAT }}
             - name: Install dependecies
               run: npm install
             - name: Configure git
@@ -49,6 +53,8 @@ jobs:
                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             - name: Push commit and tag
               run: git push --follow-tags
+              env:
+                GITHUB_TOKEN: ${{ secrets.GH_PAT }}
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               with:
