@@ -18,8 +18,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v5
             - name: Setup node
               uses: actions/setup-node@v4
               with:
@@ -29,4 +27,32 @@ jobs:
               run: npm whoami
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Checkout repository
+              uses: actions/checkout@v5
+            - name: Install dependecies
+              run: npm install
+            - name: Configure git
+              run: |
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+            - name: Bump version and capture
+              id: version
+              run: |
+                NEW_VERSION=$(npm version ${{ inputs.version }} -m "chore: bump version to %s")
+                VERSION_NUMBER=${NEW_VERSION#v}
+                echo "version=$VERSION_NUMBER" >> $GITHUB_OUTPUT
+            - name: Build project
+              run: npm run build
+            - name: Publish to npm
+              run: npm publish
+              env:
+                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Push commit and tag
+              run: git push --follow-tags
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                tag_name: v${{ steps.version.outputs.version }}
+                name: v${{ steps.version.outputs.version }}
+                generate_release_notes: true
 
