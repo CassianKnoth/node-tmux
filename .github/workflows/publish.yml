@@ -48,7 +48,7 @@ jobs:
         run: |
             CURRENT_VERSION=$(node -p "require('./package.json').version")
             NEW_VERSION=$(npx semver -i ${{inputs.version}} $CURRENT_VERSION)
-            RELEASE_BRANCH="release/v$NEW_VERSION
+            RELEASE_BRANCH="release/v$NEW_VERSION"
             git checkout -b $RELEASE_BRANCH
             echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
             echo "branch=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
