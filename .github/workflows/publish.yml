@@ -67,6 +67,9 @@ jobs:
           body: "Automated release PR for version ${{ steps.version.outputs.version }}"
           labels: release
 
+      - name: Checkout release branch
+        run: git checkout ${{ steps.version.outputs.branch }}
+
       - name: Build project
         run: npm run build
 
@@ -81,6 +84,16 @@ jobs:
           git push origin ${{ steps.version.outputs.branch }} --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+      - name: Merge release PR
+        run: |
+          gh pr merge \
+            --repo ${{ github.repository }} \
+            --merge \
+            --delete-branch \
+            --auto
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
