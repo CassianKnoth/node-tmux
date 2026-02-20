@@ -183,3 +183,5 @@ npm run dev
   - Also: allow any string instead of a fixed set of shells?
 
 - Delete default window
+
+TEST
