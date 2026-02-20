@@ -55,12 +55,7 @@ jobs:
 
       - name: Bump version
         run: |
-            npm version ${{ inputs.version }}
-
-      - name: Commit version bump
-        run: |
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ steps.branch.outputs.version }}"
+            npm version ${{ inputs.version }} -m "chore: bump version to ${{ steps.branch.outputs.version }}"
 
       - name: Build project
         run: npm run build
