@@ -53,6 +53,17 @@ jobs:
             echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
             echo "branch=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
 
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_PAT }}
+          commit-message: "chore: bump version to ${{ steps.branch.outputs.version }}"
+          branch: ${{ steps.branch.outputs.branch }}
+          base: main
+          title: "Release ${{ steps.branch.outputs.version }}"
+          body: "Automated release PR for version ${{ steps.branch.outputs.version }}"
+          labels: release
+
       - name: Bump version
         run: |
             npm version ${{ inputs.version }} -m "chore: bump version to ${{ steps.branch.outputs.version }}"
@@ -70,17 +81,6 @@ jobs:
           git push origin ${{ steps.branch.outputs.branch }} --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GH_PAT }}
-          commit-message: "chore: bump version to ${{ steps.branch.outputs.version }}"
-          branch: ${{ steps.branch.outputs.branch }}
-          base: main
-          title: "Release ${{ steps.branch.outputs.version }}"
-          body: "Automated release PR for version ${{ steps.branch.outputs.version }}"
-          labels: release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
