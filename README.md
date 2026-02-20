@@ -154,13 +154,19 @@ git clone git@github.com:CassianKnoth/configurable-tmux-node.git
 cd configurable-tmux-node
 ```
 
-3. 🏗️ Build the project
+3. 💽 Install dependencies
+
+```bash
+npm i
+```
+
+4. 🏗️ Build the project
 
 ```bash
 npm run build
 ```
 
-4. 🚀 Run CLI
+5. 🚀 Run CLI
 
 ```bash
 npm run dev
@@ -174,5 +180,6 @@ npm run dev
   - Reference windows or panes from a `snippets` list if you need the same ones in multiple session configs
 
 - Configure shell per pane instead of globally
+  - Also: allow any string instead of a fixed set of shells?
 
 - Delete default window
