@@ -1,12 +1,32 @@
 name: Publish and release
 
 on: 
-    push
+    workflow_dispatch:
+        inputs:
+            version:
+                description: "Version bump type"
+                required: true
+                default: "patch"
+                type: choice
+                options:
+                    - patch
+                    - minor
+                    - major
 
 jobs:
-    test:
+    publish:
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout repository
               uses: actions/checkout@v5
+            - name: Setup node
+              uses: actions/setup-node@v4
+              with:
+                node-version: '22'
+                registry-url: https://registry.npmjs.org/
+            - name: Verify npm auth
+              run: npm whoami
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
